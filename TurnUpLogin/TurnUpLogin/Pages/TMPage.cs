@@ -18,8 +18,6 @@ namespace TurnUpLogin.Pages
                 createButton.Click();
                 Wait.WaitForWebElementToExist(driver, "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", "XPath", 5);
        
-          
-
 
             //Identify drop down list and select Time
             IWebElement material = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
@@ -29,7 +27,6 @@ namespace TurnUpLogin.Pages
             time.Click();
             Wait.WaitForWebElementToExist(driver, "Code", "Id", 1);
                 
-
 
             //Identify code type and input code
             IWebElement code = driver.FindElement(By.Id("Code"));
@@ -51,7 +48,7 @@ namespace TurnUpLogin.Pages
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
          
-         Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[4]/a[4]/span", "XPath", 7);
+         Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[4]/a[4]/span", "XPath", 5);
 
             //Identify go to last page and click
 
@@ -71,19 +68,24 @@ namespace TurnUpLogin.Pages
             {
                 Assert.Fail("Test failed, item is not created");
             }
-
-      
-            Thread.Sleep(3000);
-
+            IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            Assert.That(actualDescription.Text == "Automation", "actual Description and expected Description did not match");
         }
+
 
 
 
         //Edit TM
         public void UpdateTM(IWebDriver driver)
         {
-        //Identify and click on Edit button
-        IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+            Thread.Sleep(4000);
+            //Go to Last page
+            IWebElement lastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            lastPage.Click();
+            Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", "XPath", 3);
+
+            //Identify and click on Edit button
+            IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
         editButton.Click();
             Thread.Sleep(2000);
 
@@ -142,16 +144,21 @@ namespace TurnUpLogin.Pages
             {
                 Assert.Fail("Test failed, Entry not updated");
             }
-           
-            Thread.Sleep(3000);
-
+            Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]", "XPath", 6);
+      
     }
 
     //Delete TM
     public void DeleteTM(IWebDriver driver)
         {
-            //Identify and click on delete button
+          
+           
+            //Go to Last page
+            IWebElement lastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            lastPage.Click();
+            //Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]", 5);
 
+            //Identify and click on delete button
             IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
             deleteButton.Click();
             Thread.Sleep(2000);
@@ -167,7 +174,7 @@ namespace TurnUpLogin.Pages
             IWebElement lastItemPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
             IWebElement lastItemTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
             Thread.Sleep(2000);
-            if (lastItemCode.Text == "June" && lastItemDescription.Text == "Automation" && lastItemPrice.Text == "100" && lastItemTypeCode.Text == "T")
+            if (lastItemCode.Text != "June" && lastItemDescription.Text != "Automation" && lastItemPrice.Text != "100" && lastItemTypeCode.Text == "T")
             {
                 Assert.Pass("Test passed");
                 //Console.WriteLine("Item exits, Test Failed");

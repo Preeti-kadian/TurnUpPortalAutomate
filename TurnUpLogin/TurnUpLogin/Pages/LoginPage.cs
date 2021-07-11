@@ -27,30 +27,21 @@ namespace TurnUpLogin.Pages
             IWebElement loginButton = driver.FindElement(By.XPath("/html/body/div[4]/div/div/section/form/div[3]/input[1]"));
             loginButton.Click();
 
-            try
+            //check if login successful
+            IWebElement helloHari = driver.FindElement(By.XPath("//*[@id='logoutForm']/ul/li/a"));
+
+
+            if (helloHari.Text == "Hello hari!")
             {
+                Console.WriteLine("Login Successful, Test Passed");
+            }
+            else
+            {
+                Console.WriteLine("Login failed, Test failed");
 
-                //check if login successful
-                IWebElement helloHari = driver.FindElement(By.XPath("//*[@id='logoutForm']/ul/li/a"));
-
-
-                if (helloHari.Text == "Hello hari!")
-                {
-                    Console.WriteLine("Login Successful, Test Passed");
-                }
-                else
-                {
-                    Console.WriteLine("Login failed, Test failed");
-
-                }
             }
 
-            catch(Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
         }
-
      
     }
 }

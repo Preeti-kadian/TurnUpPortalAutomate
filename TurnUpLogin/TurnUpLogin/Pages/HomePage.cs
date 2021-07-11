@@ -27,6 +27,7 @@ namespace TurnUpLogin.Pages
             {
                 Assert.Fail(ex.Message);
             }
+            Thread.Sleep(3000);
 
         }
 
