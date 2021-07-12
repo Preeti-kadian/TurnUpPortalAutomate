@@ -6,27 +6,22 @@ using TurnUpLogin.Pages;
 namespace TurnUpPortal
 {
     [TestFixture]
+    [Parallelizable]
     class Program : CommonDriver
     {
-
-            [SetUp]
-            public void LoginSteps()
-            {
-            //Open chrome browser
-            driver = new ChromeDriver();
-
-                //Object for login page
-                LoginPage loginObj = new LoginPage();
-                loginObj.LoginActions(driver);
-
-                //Object for Home page
-                HomePage homeObj = new HomePage();
-                homeObj.GoToTMPage(driver);
-        }
+          
+      
+    
 
         [Test]
         public void CreateTMTest()
         {
+            //Test navigation to Time and Material module
+            //Object for Home page
+            HomePage homeObj = new HomePage();
+            homeObj.GoToTMPage(driver);
+
+            //Test-Create new TM entry
             TMPage tmObj = new TMPage();
             tmObj.CreateTM(driver);
         }
@@ -34,6 +29,12 @@ namespace TurnUpPortal
         [Test]
         public void UpdateTMTest()
         {
+            //Test navigation to Time and Material module
+            //Object for Home page
+            HomePage homeObj = new HomePage();
+            homeObj.GoToTMPage(driver);
+
+            //Test-Update new TM entry
             TMPage tmObj = new TMPage();
             tmObj.UpdateTM(driver);
         }
@@ -41,17 +42,16 @@ namespace TurnUpPortal
         [Test]
         public void DeleteTMTest()
         {
+            //Test navigation to Time and Material module
+            //Object for Home page
+            HomePage homeObj = new HomePage();
+            homeObj.GoToTMPage(driver);
+
+            //Test-Delete updated TM entry
             TMPage tmObj = new TMPage();
             tmObj.DeleteTM(driver);
         }
-
-
-        [TearDown]
-            public void ClearTestRun()
-            {
-            driver.Quit();
-            }
-
+            
 
         }
     }

@@ -3,12 +3,17 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
 using NUnit.Framework;
+using TurnUpLogin.Utilities;
 
 namespace TurnUpLogin.Pages
 {
     
-    public class HomePage
+    public class HomePage: CommonDriver
     {
+        IWebElement administration = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul[1]/li[5]/a"));
+        
+
+
         //navigate to time and material module 
         public void GoToTMPage(IWebDriver driver)
         {
@@ -16,7 +21,6 @@ namespace TurnUpLogin.Pages
             {
                 //Identify Administration tab and click
 
-                IWebElement administration = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul[1]/li[5]/a"));
                 administration.Click();
 
                 //Identify Time and material module and click
@@ -31,5 +35,21 @@ namespace TurnUpLogin.Pages
 
         }
 
+        public void GoToEmployeePage(IWebDriver driver)
+        {
+            try
+            {
+                //Click on Adminstration tab
+                administration.Click();
+
+                //Identify Employee module and click
+                IWebElement employeeLink = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a"));
+                employeeLink.Click();
+            }
+            catch(Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
         }
+    }
 }

@@ -48,7 +48,7 @@ namespace TurnUpLogin.Pages
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
          
-         Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[4]/a[4]/span", "XPath", 5);
+         Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[4]/a[4]/span", "XPath", 7);
 
             //Identify go to last page and click
 
@@ -78,11 +78,11 @@ namespace TurnUpLogin.Pages
         //Edit TM
         public void UpdateTM(IWebDriver driver)
         {
-            Thread.Sleep(4000);
+            Thread.Sleep(4000);  
             //Go to Last page
             IWebElement lastPage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             lastPage.Click();
-            Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", "XPath", 3);
+            Wait.WaitForWebElementToExist(driver, "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", "XPath", 4);
 
             //Identify and click on Edit button
             IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
@@ -90,8 +90,8 @@ namespace TurnUpLogin.Pages
             Thread.Sleep(2000);
 
 
-        //Identify drop down list and select Material
-        IWebElement editMaterial = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
+            //Identify drop down list and select Material
+            IWebElement editMaterial = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
         editMaterial.Click();
 
         IWebElement editTime = driver.FindElement(By.Id("TypeCode_option_selected"));

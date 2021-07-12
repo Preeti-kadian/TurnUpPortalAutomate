@@ -27,9 +27,6 @@ namespace TurnUpLogin.Utilities
 
         }
 
-        internal static void WaitForWebElementToExist(IWebDriver driver, string v1, int v2)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
